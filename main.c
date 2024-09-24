@@ -37,7 +37,7 @@ double average_price(Item *item_list, int size)
         sum += item_list[i].price;
     }
     avg = sum/size;
-    printf("The average price is $%f.\n",avg);
+    printf("The average price is $%f.\n\n",avg);
     return avg;
 }
 
@@ -49,21 +49,24 @@ void print_items(Item *item_list, int size)
     }
 }
 
-void item_find(Item *item_list, char sku, int size)
+void item_find(Item *item_list, char*argv[], int size)
 {
 
-    while (/* condition */)
+    int i = 0;
+    printf("SKU to search: %s\n\n", argv[1]);
+    while (strcmp(argv[1],item_list[i].sku)!=0 && i<size)
     {
-        /* code */
+        printf("No match at index %d\n",i);
+        i++;
     }
+    printf("\nMatch at index %d\nName: %s\nSku: %s\nPrice: %f\nCategory: %s\n\n",i, item_list[i].name, item_list[i].sku, item_list[i].price, item_list[i].category);
     
-
-
-
 }
 
 int main(int argc, char*argv[])
 {
+
+    printf("You have entered %s SKU to search for.\n\n", argv[1]);
 
     int num_item = 5;
     int index;
@@ -84,13 +87,12 @@ int main(int argc, char*argv[])
     add_item(item_list, 1.99, "5", "dessert", "ice cream", index);
     index++;
 
-    char sku_search;
-    sku_search = argv[1];
-
 
     print_items(item_list, num_item);
     average_price(item_list, num_item);
+    item_find(item_list, argv, num_item);
     free_items(item_list, num_item);
+
 
     return 0;
 }
